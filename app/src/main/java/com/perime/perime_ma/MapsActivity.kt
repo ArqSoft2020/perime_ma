@@ -1,4 +1,4 @@
-package com.daandradec.perime_ma
+package com.perime.perime_ma
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

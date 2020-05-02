@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.daandradec.perime_ma"
+        applicationId "com.perime.perime_ma"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
