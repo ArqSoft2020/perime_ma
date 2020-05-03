@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">perime_ma</string>
     <string name="title_activity_maps">Map</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_userprofile">Cuenta</string>
+    <string name="menu_publications">Publicaciones</string>
+    <string name="menu_orders">Pedidos</string>
 </resources>
