@@ -1,11 +1,16 @@
 package com.perime.perime_ma.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.perime.perime_ma.R
-import com.perime.perime_ma.adapters.PublicationAdapter
+import android.content.Intent
+
+import com.perime.perime_ma.MapsActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.perime.perime_ma.models.Publication
+import com.perime.perime_ma.adapters.PublicationAdapter
 import kotlinx.android.synthetic.main.activity_publication.*
+import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
+
 
 class PublicationActivity : AppCompatActivity() {
 
@@ -18,5 +23,13 @@ class PublicationActivity : AppCompatActivity() {
         var personList: List<Publication> = listOf(Publication("Azucar","$20","de color blanca"), Publication("Arroz","$10","de color blanca"))
         adapter = PublicationAdapter(this, R.layout.list_item, personList)
         listView.adapter = adapter
+
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile()})
     }
+
+
+    /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
+    private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
+    private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
+    private fun goToActivityProfile() = startActivity(Intent(this, FormPublicationActivity::class.java))
 }

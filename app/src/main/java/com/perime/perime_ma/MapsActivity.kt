@@ -1,43 +1,33 @@
 package com.perime.perime_ma
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.content.Intent
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.perime.perime_ma.providers.MapsKotlinProvider
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+import com.perime.perime_ma.activities.PublicationActivity
+import com.perime.perime_ma.activities.FormPublicationActivity
+import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
 
-    private lateinit var mMap: GoogleMap
+class MapsActivity : MapsKotlinProvider() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+            .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile()})
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    }
+
+    /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
+    fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
+    private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
+    private fun goToActivityProfile() = startActivity(Intent(this, FormPublicationActivity::class.java))
 }
