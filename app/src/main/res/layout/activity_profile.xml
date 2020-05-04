@@ -175,19 +175,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <FrameLayout
+    <include
         android:id="@+id/menu_activity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        layout="@layout/activity_menu"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#EAE8E8"
-            android:clickable="false"
-            app:itemTextColor="@color/cardview_dark_background"
-            app:menu="@menu/bottom_nav_menu" />
-
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
