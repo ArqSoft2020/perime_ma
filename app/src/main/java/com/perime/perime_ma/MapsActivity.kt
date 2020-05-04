@@ -35,14 +35,20 @@ class MapsActivity : MapsKotlinProvider() {
                 }
             })
 
-        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile(confirm)})
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityPublication(confirm)},{goToActivityProfile(confirm)})
     }
 
 
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
     fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
-    private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
+    private fun goToActivityPublication(validation:Boolean) {
+        if (validation){
+            startActivity(Intent(this, PublicationActivity::class.java))
+        }else{
+            Toast.makeText(this,"Usuario no identificado, Por favor registrate",Toast.LENGTH_LONG).show()
+        }
+    }
     private fun goToActivityProfile(validation:Boolean){
         if (validation){
             startActivity(Intent(this, ProfileActivity::class.java))
