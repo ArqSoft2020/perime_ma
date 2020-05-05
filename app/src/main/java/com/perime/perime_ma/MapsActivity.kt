@@ -42,6 +42,7 @@ class MapsActivity : MapsKotlinProvider() {
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
     fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
+
     private fun goToActivityPublication(validation:Boolean) {
         if (validation){
             startActivity(Intent(this, PublicationActivity::class.java))
@@ -53,6 +54,7 @@ class MapsActivity : MapsKotlinProvider() {
         if (validation){
             startActivity(Intent(this, ProfileActivity::class.java))
         }else{
+
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
