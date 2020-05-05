@@ -2,12 +2,6 @@ package com.perime.perime_ma
 
 import android.os.Bundle
 import android.content.Intent
-import android.util.Log
-import apollo.FilesQuery
-import com.apollographql.apollo.ApolloCall
-import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.exception.ApolloException
 
 import com.google.android.gms.maps.SupportMapFragment
 import com.perime.perime_ma.providers.MapsKotlinProvider
@@ -15,12 +9,17 @@ import com.perime.perime_ma.providers.MapsKotlinProvider
 import com.perime.perime_ma.activities.PublicationActivity
 import com.perime.perime_ma.activities.FormPublicationActivity
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
-import okhttp3.OkHttpClient
+
+import com.apollographql.apollo.ApolloClient
+import com.perime.perime_ma.providers.apollographql.ApolloGraphql
+import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaQuerys
+import android.util.Log
+import apollo.FilesQuery
+import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaMutations
 
 class MapsActivity : MapsKotlinProvider() {
 
-    private val BASE_URL = "http://ec2-54-88-18-124.compute-1.amazonaws.com:3000/graphql"
-    private lateinit var client: ApolloClient
+    private lateinit var apolloClient: ApolloClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,32 +32,9 @@ class MapsActivity : MapsKotlinProvider() {
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile()})
 
-        client = setUpApolloClient()
-        Log.w("DEBUG MENSAJE: ", "PROBAAANDO")
-        client.newBuilder().build().query(
-            FilesQuery()
-        ).enqueue(object : ApolloCall.Callback<FilesQuery.Data>(){
-            override fun onFailure(e: ApolloException) {
-                Log.w("############******-------WWW##  ERROR ---- :", e.message.toString())
-            }
-
-            override fun onResponse(response: Response<FilesQuery.Data>) {
-                var data = response.data?.files
-                Log.w("############******------- WWW##   Graphql  ----  ::: ", data.toString())
-            }
-
-        })
+        apolloClient = ApolloGraphql.setUpApolloClient()
     }
 
-    private fun setUpApolloClient(): ApolloClient {
-
-        val okHttp = OkHttpClient
-            .Builder()
-        return ApolloClient.builder()
-            .serverUrl(BASE_URL)
-            .okHttpClient(okHttp.build())
-            .build()
-    }
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
     fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
