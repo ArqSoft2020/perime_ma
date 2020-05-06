@@ -4,19 +4,23 @@
 
     <item
         android:id="@+id/btn_menu_home"
-        android:icon="?android:attr/actionModeWebSearchDrawable"
+        android:checked="false"
+        android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/menu_home" />
     <item
         android:id="@+id/btn_menu_orders"
+        android:checked="false"
         android:icon="@android:drawable/ic_menu_today"
         android:title="@string/menu_orders" />
     <item
         android:id="@+id/btn_menu_publications"
+        android:checked="false"
         android:icon="@android:drawable/ic_menu_upload"
         android:title="@string/menu_publications" />
     <item
         android:id="@+id/btn_menu_userprofile"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:checked="false"
+        android:icon="@drawable/ic_person_black_24dp"
         android:title="@string/menu_userprofile" />
 
 </menu>
