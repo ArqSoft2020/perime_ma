@@ -16,6 +16,7 @@ class PublicationActivity : AppCompatActivity() {
 
     private lateinit var adapter: PublicationAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_publication)
@@ -31,5 +32,5 @@ class PublicationActivity : AppCompatActivity() {
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
     private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
-    private fun goToActivityProfile() = startActivity(Intent(this, FormPublicationActivity::class.java))
+    private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 }
