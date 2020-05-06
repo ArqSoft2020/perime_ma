@@ -34,8 +34,6 @@ class MapsActivity : MapsKotlinProvider() {
         mapFragment.getMapAsync(this)
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile()})
-
-        apolloClient = ApolloGraphql.setUpApolloClient()
     }
 
 
