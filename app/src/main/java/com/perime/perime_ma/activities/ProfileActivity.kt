@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.perime.perime_ma.MapsActivity
 import com.perime.perime_ma.R
 import com.perime.perime_ma.extensions.FindMenuButtonNavigation
+import com.perime.perime_ma.extensions.focusMenuElement
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
 
 class ProfileActivity : AppCompatActivity() {
@@ -15,6 +16,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
+        setFocusAllMenuElement()
     }
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
@@ -22,4 +24,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
+    private fun setFocusAllMenuElement(){
+        //focusMenuElement(R.id.btn_menu_home, false)
+        //focusMenuElement(R.id.btn_menu_orders, false)
+        //focusMenuElement(R.id.btn_menu_publications, false)
+        focusMenuElement(R.id.btn_menu_userprofile, true)
+    }
 }

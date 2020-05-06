@@ -16,6 +16,7 @@
         android:paddingRight="5dp"
         android:text="PUBLICACIONES PROPIAS"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#C63636"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="sans"
