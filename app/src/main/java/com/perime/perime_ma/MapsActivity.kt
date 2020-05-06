@@ -52,7 +52,12 @@ class MapsActivity : MapsKotlinProvider() {
 
         val mFab = findViewById<FloatingActionButton>(R.id.agregarPublicacion)
         mFab.setOnClickListener {
-            startActivity(Intent(this, FormPublicationActivity::class.java))
+            if (confirm){
+                startActivity(Intent(this, FormPublicationActivity::class.java))
+            }else{
+                Toast.makeText(this,"No estas registrado, Por favor registrate",Toast.LENGTH_LONG).show()
+            }
+
         }
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityPublication(confirm)},{goToActivityProfile(confirm)})
