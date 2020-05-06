@@ -21,6 +21,7 @@ import com.perime.perime_ma.providers.apollographql.publication_querys.Publicati
 
 import android.widget.Switch
 import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.perime.perime_ma.activities.*
 
 var confirm:Boolean=false
@@ -48,6 +49,16 @@ class MapsActivity : MapsKotlinProvider() {
                     confirm=false
                 }
             })
+
+        val mFab = findViewById<FloatingActionButton>(R.id.agregarPublicacion)
+        mFab.setOnClickListener {
+            if (confirm){
+                startActivity(Intent(this, FormPublicationActivity::class.java))
+            }else{
+                Toast.makeText(this,"No estas registrado, Por favor registrate",Toast.LENGTH_LONG).show()
+            }
+
+        }
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityPublication(confirm)},{goToActivityProfile(confirm)})
     }
