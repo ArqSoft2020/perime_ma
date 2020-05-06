@@ -56,7 +56,7 @@
         map:backgroundTint="#9B7C4DFF"
         map:layout_constraintBottom_toTopOf="@+id/menu_activity"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.069"
+        map:layout_constraintHorizontal_bias="0.9"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
         map:layout_constraintVertical_bias="1.0"
