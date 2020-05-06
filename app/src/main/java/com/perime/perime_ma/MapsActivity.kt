@@ -15,7 +15,10 @@ import com.perime.perime_ma.providers.apollographql.ApolloGraphql
 import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaQuerys
 import android.util.Log
 import apollo.FilesQuery
+import apollo.PublicationsQuery
 import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaMutations
+import com.perime.perime_ma.providers.apollographql.publication_querys.PublicationMutations
+import com.perime.perime_ma.providers.apollographql.publication_querys.PublicationQuerys
 
 class MapsActivity : MapsKotlinProvider() {
 

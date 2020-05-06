@@ -30,7 +30,7 @@ class MultimediaMutations{
             val inputType = Input.optional(type)
             val inputFile = Input.optional(file)
 
-            client.mutate(
+            client.newBuilder().build().mutate(
                 StoreFileMutation(inputId, inputType, inputFile)
             ).enqueue(object : ApolloCall.Callback<StoreFileMutation.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
@@ -39,7 +39,7 @@ class MultimediaMutations{
 
                     queryCallback(response)
 
-                    Log.w("######  GRAPHQL: CONSULTA FILESQUERY::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
+                    Log.w("######  GRAPHQL: storeFileMutation::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
                 }
 
             })
@@ -52,7 +52,7 @@ class MultimediaMutations{
             val inputType = Input.optional(type)
             val inputFile = Input.optional(file)
 
-            client.mutate(
+            client.newBuilder().build().mutate(
                 UpdateFileMutation(inputId, inputType, inputFile)
             ).enqueue(object : ApolloCall.Callback<UpdateFileMutation.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
@@ -61,7 +61,7 @@ class MultimediaMutations{
 
                     queryCallback(response)
 
-                    Log.w("######  GRAPHQL: CONSULTA FILESQUERY::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
+                    Log.w("######  GRAPHQL: updateFileMutation::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
                 }
 
             })
@@ -75,7 +75,7 @@ class MultimediaMutations{
             val inputId = Input.optional(id)
             val inputType = Input.optional(type)
 
-            client.mutate(
+            client.newBuilder().build().mutate(
                 DeleteFileMutation(inputId, inputType)
             ).enqueue(object : ApolloCall.Callback<DeleteFileMutation.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
@@ -84,7 +84,7 @@ class MultimediaMutations{
 
                     queryCallback(response)
 
-                    Log.w("######  GRAPHQL: CONSULTA FILESQUERY::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
+                    Log.w("######  GRAPHQL: deleteFileMutation::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
                 }
 
             })

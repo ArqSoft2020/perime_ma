@@ -56,7 +56,7 @@ class MultimediaQuerys{
             Log.w("-----------", "--------------------------------------------")
             val input = Input.optional(id)
 
-            client.query(
+            client.newBuilder().build().query(
                 GetFileQuery(input)
             ).enqueue(object : ApolloCall.Callback<GetFileQuery.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
@@ -87,7 +87,7 @@ class MultimediaQuerys{
             val inputId = Input.optional(id)
             val inputType = Input.optional(type)
 
-            client.query(
+            client.newBuilder().build().query(
                 GetFileRegisterQuery(inputId, inputType)
             ).enqueue(object : ApolloCall.Callback<GetFileRegisterQuery.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
@@ -96,7 +96,7 @@ class MultimediaQuerys{
 
                     queryCallback(response)
 
-                    Log.w("######  GRAPHQL: CONSULTA FILESQUERY::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
+                    Log.w("######  GRAPHQL: getFileRegisterQuery::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
                 }
 
             })

@@ -1,0 +1,67 @@
+query publications{
+    publications{
+        title
+        description
+        state_publication
+        id_image
+        stock
+        expiration_date
+        price
+        categories
+    }
+}
+
+query getPublication($id: ID){
+    getPublication(id: $id){
+        title
+        description
+        state_publication
+        id_image
+        stock
+        expiration_date
+        price
+        categories
+    }
+}
+
+
+
+
+mutation createPublication($input : PublicationInput){
+    createPublication(input: $input){
+        title
+        description
+        state_publication
+        id_image
+        stock
+        expiration_date
+        price
+        categories
+    }
+}
+
+mutation updatePublication($id: ID, $input : PublicationInput){
+    updatePublication(id: $id, input: $input){
+        title
+        description
+        state_publication
+        id_image
+        stock
+        expiration_date
+        price
+        categories
+    }
+}
+
+mutation deletePublication($id: ID){
+    deletePublication(id: $id){
+        title
+        description
+        state_publication
+        id_image
+        stock
+        expiration_date
+        price
+        categories
+    }
+}
