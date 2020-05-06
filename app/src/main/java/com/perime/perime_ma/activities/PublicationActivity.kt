@@ -25,12 +25,13 @@ class PublicationActivity : AppCompatActivity() {
         adapter = PublicationAdapter(this, R.layout.list_item, personList)
         listView.adapter = adapter
 
-        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityPublication()},{goToActivityProfile()})
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
     }
 
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
     private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
+    private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 }

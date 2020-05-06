@@ -23,7 +23,7 @@
     <include
         android:id="@+id/menu_activity"
         layout="@layout/activity_menu"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="51dp"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
