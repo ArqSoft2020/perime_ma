@@ -8,12 +8,26 @@ import com.perime.perime_ma.providers.MapsKotlinProvider
 
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
 
+
+import com.apollographql.apollo.ApolloClient
+import com.perime.perime_ma.providers.apollographql.ApolloGraphql
+import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaQuerys
+import android.util.Log
+import apollo.FilesQuery
+import apollo.PublicationsQuery
+import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaMutations
+import com.perime.perime_ma.providers.apollographql.publication_querys.PublicationMutations
+import com.perime.perime_ma.providers.apollographql.publication_querys.PublicationQuerys
+
 import android.widget.Switch
 import android.widget.Toast
 import com.perime.perime_ma.activities.*
 
 var confirm:Boolean=false
+
 class MapsActivity : MapsKotlinProvider() {
+
+    private lateinit var apolloClient: ApolloClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +51,6 @@ class MapsActivity : MapsKotlinProvider() {
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityPublication(confirm)},{goToActivityProfile(confirm)})
     }
-
 
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
