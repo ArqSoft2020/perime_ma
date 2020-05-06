@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.perime.perime_ma.MapsActivity
 import com.perime.perime_ma.R
 import com.perime.perime_ma.adapters.PublicationAdapter
+import com.perime.perime_ma.extensions.focusMenuElement
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
 import com.perime.perime_ma.models.Publication
 import kotlinx.android.synthetic.main.activity_publication.*
@@ -25,6 +26,7 @@ class UserPublication : AppCompatActivity() {
         listView.adapter = adapter
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
+        setFocusAllMenuElement()
     }
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
@@ -32,4 +34,10 @@ class UserPublication : AppCompatActivity() {
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
+    private fun setFocusAllMenuElement(){
+        //focusMenuElement(R.id.btn_menu_home, false)
+        focusMenuElement(R.id.btn_menu_orders, true)
+        //focusMenuElement(R.id.btn_menu_publications, false)
+        //focusMenuElement(R.id.btn_menu_userprofile, false)
+    }
 }

@@ -23,6 +23,7 @@ import android.widget.Switch
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.perime.perime_ma.activities.*
+import com.perime.perime_ma.extensions.focusMenuElement
 
 var confirm:Boolean=false
 
@@ -60,7 +61,8 @@ class MapsActivity : MapsKotlinProvider() {
 
         }
 
-        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityPublication(confirm)},{goToActivityProfile(confirm)})
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityUserPublication(confirm)},{goToActivityProfile(confirm)})
+        setFocusAllMenuElement()
     }
 
 
@@ -91,6 +93,11 @@ class MapsActivity : MapsKotlinProvider() {
 
     }
 
-
+    private fun setFocusAllMenuElement(){
+        focusMenuElement(R.id.btn_menu_home, true)
+        //focusMenuElement(R.id.btn_menu_orders, false)
+        //focusMenuElement(R.id.btn_menu_publications, false)
+        //focusMenuElement(R.id.btn_menu_userprofile, false)
+    }
 
 }
