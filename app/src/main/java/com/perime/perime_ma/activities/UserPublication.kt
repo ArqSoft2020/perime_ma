@@ -5,14 +5,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.perime.perime_ma.MapsActivity
 import com.perime.perime_ma.R
-import com.perime.perime_ma.extensions.FindMenuButtonNavigation
+import com.perime.perime_ma.adapters.PublicationAdapter
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
+import com.perime.perime_ma.models.Publication
+import kotlinx.android.synthetic.main.activity_publication.*
+import kotlinx.android.synthetic.main.activity_user_publication.*
+import kotlinx.android.synthetic.main.activity_user_publication.listView
 
-class ProfileActivity : AppCompatActivity() {
+class UserPublication : AppCompatActivity() {
+
+    private lateinit var adapter: PublicationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_user_publication)
+
+        var personList: List<Publication> = listOf(Publication("Kasumi","$10","de color verde"))
+        adapter = PublicationAdapter(this, R.layout.list_item, personList)
+        listView.adapter = adapter
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
     }

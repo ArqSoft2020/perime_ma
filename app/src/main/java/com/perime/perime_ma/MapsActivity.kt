@@ -63,6 +63,13 @@ class MapsActivity : MapsKotlinProvider() {
             Toast.makeText(this,"Usuario no identificado, Por favor registrate",Toast.LENGTH_LONG).show()
         }
     }
+    private fun goToActivityUserPublication(validation: Boolean) {
+        if (validation){
+            startActivity(Intent(this, UserPublication::class.java))
+        }else{
+            Toast.makeText(this,"Usuario no identificado, Por favor registrate",Toast.LENGTH_LONG).show()
+        }
+    }
     private fun goToActivityProfile(validation:Boolean){
         if (validation){
             startActivity(Intent(this, ProfileActivity::class.java))
