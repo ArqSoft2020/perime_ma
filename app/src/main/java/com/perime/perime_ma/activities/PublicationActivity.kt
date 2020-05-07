@@ -57,7 +57,13 @@ class PublicationActivity : AppCompatActivity() {
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
 
-    fun imageClick(view : View){
+    fun imageClickUpdateEvent(view: View){
+        Handler(Looper.getMainLooper()).post(Runnable {
+            Toast.makeText(applicationContext,"Clickeo la imagen del engranaje", Toast.LENGTH_LONG).show()
+        })
+    }
+
+    fun imageClickCloseEvent(view : View){
         Handler(Looper.getMainLooper()).post(Runnable {
             Toast.makeText(applicationContext,"Clickeo la imagen de la X de cerrar", Toast.LENGTH_LONG).show()
         })
