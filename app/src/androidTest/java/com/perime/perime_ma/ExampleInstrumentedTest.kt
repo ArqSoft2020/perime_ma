@@ -1,4 +1,4 @@
-package com.daandradec.perime_ma
+package com.perime.perime_ma
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

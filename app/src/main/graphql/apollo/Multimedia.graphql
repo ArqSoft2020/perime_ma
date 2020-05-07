@@ -1,0 +1,48 @@
+query files {
+    files{
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
+
+query getFile($id: ID){
+    getFile(id: $id){
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
+
+query getFileRegister($id: ID, $type: String){
+    getFileRegister(id: $id, type: $type){
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
+
+
+mutation storeFile($id: ID, $type: String, $file: String){
+    storeFile(id: $id, type: $type, file: $file){
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
+
+mutation updateFile($id: ID, $type: String, $file: String){
+    updateFile(id: $id, type: $type, file: $file){
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
+
+mutation deleteFile($id: ID, $type: String){
+    deleteFile(id: $id, type: $type){
+        id_model_media
+        type_model_media
+        path_media
+    }
+}
