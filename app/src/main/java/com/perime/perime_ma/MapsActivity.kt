@@ -62,7 +62,7 @@ class MapsActivity : MapsKotlinProvider() {
         }
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityUserPublication(confirm)},{goToActivityProfile(confirm)})
-        setFocusAllMenuElement()
+        focusMenuElement(R.id.btn_menu_home, true)
     }
 
 
@@ -91,13 +91,6 @@ class MapsActivity : MapsKotlinProvider() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-    }
-
-    private fun setFocusAllMenuElement(){
-        focusMenuElement(R.id.btn_menu_home, true)
-        //focusMenuElement(R.id.btn_menu_orders, false)
-        //focusMenuElement(R.id.btn_menu_publications, false)
-        //focusMenuElement(R.id.btn_menu_userprofile, false)
     }
 
 }

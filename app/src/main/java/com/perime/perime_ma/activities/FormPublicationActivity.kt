@@ -32,8 +32,7 @@ class FormPublicationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_form_publication)
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
-        menu_activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).menu.findItem(R.id.btn_menu_publications).setChecked(true)
-
+        focusMenuElement(R.id.btn_menu_publications, true)
 
         btn_publication_add.setOnClickListener() {
             val title = txt_publication_title.text.toString()
@@ -84,11 +83,6 @@ class FormPublicationActivity : AppCompatActivity() {
     private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
-    private fun goToActivityProfile() = startActivity(Intent(this, FormPublicationActivity::class.java))
-    private fun setFocusAllMenuElement(){
-        focusMenuElement(R.id.btn_menu_home, false)
-        focusMenuElement(R.id.btn_menu_orders, false)
-        focusMenuElement(R.id.btn_menu_publications, false)
-        focusMenuElement(R.id.btn_menu_userprofile, false)
-    }
+    private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
+
 }
