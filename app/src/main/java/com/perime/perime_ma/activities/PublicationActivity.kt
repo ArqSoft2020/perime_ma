@@ -5,6 +5,8 @@ import com.perime.perime_ma.R
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.widget.Toast
 
 import com.perime.perime_ma.MapsActivity
 import androidx.appcompat.app.AppCompatActivity
@@ -54,4 +56,10 @@ class PublicationActivity : AppCompatActivity() {
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
+
+    fun imageClick(view : View){
+        Handler(Looper.getMainLooper()).post(Runnable {
+            Toast.makeText(applicationContext,"Clickeo la imagen de la X de cerrar", Toast.LENGTH_LONG).show()
+        })
+    }
 }
