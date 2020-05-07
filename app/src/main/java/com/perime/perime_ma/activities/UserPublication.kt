@@ -21,8 +21,7 @@ class UserPublication : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_publication)
 
-        var personList: List<Publication> = listOf(Publication("Kasumi","$10","de color verde","",
-            listOf("abc")))
+        var personList: List<Publication> = listOf(Publication("PUBLICACION ESTATICA","Esta es una publicacion ESTATICA (ya que aun no hay usuarios)","03/07/2020","\$10",  listOf("abc")))
         adapter = PublicationAdapter(this, R.layout.list_item, personList)
         listView.adapter = adapter
 

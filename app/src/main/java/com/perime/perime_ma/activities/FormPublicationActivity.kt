@@ -83,6 +83,6 @@ class FormPublicationActivity : AppCompatActivity() {
     private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
-    private fun goToActivityProfile() = startActivity(Intent(this, FormPublicationActivity::class.java))
+    private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
 }
