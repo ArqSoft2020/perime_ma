@@ -1,5 +1,6 @@
 query publications{
     publications{
+        _id
         title
         description
         state_publication
@@ -13,6 +14,7 @@ query publications{
 
 query getPublication($id: ID){
     getPublication(id: $id){
+        _id
         title
         description
         state_publication
@@ -29,6 +31,7 @@ query getPublication($id: ID){
 
 mutation createPublication($input : PublicationInput){
     createPublication(input: $input){
+        _id
         title
         description
         state_publication
@@ -42,6 +45,7 @@ mutation createPublication($input : PublicationInput){
 
 mutation updatePublication($id: ID, $input : PublicationInput){
     updatePublication(id: $id, input: $input){
+        _id
         title
         description
         state_publication
@@ -55,6 +59,7 @@ mutation updatePublication($id: ID, $input : PublicationInput){
 
 mutation deletePublication($id: ID){
     deletePublication(id: $id){
+        _id
         title
         description
         state_publication

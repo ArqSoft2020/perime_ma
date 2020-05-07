@@ -4,11 +4,14 @@ package com.perime.perime_ma.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloClient
@@ -73,7 +76,12 @@ class FormPublicationActivity : AppCompatActivity() {
             Log.w("File: ", publication?.title.toString())
 
             Handler(Looper.getMainLooper()).post(Runnable {
-                Toast.makeText(applicationContext,"Publicación Realizada con Exito", Toast.LENGTH_LONG).show()
+                val toast = Toast.makeText(applicationContext,"Publicación Realizada con Exito", Toast.LENGTH_LONG)
+                val view = toast.view
+                view.setBackgroundColor(Color.BLACK);
+                val text = view.findViewById<View>(android.R.id.message) as TextView
+                text.setTextColor(Color.WHITE);
+                toast.show()
             })
 
         }
