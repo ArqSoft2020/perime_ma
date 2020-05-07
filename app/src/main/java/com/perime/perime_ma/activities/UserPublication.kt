@@ -21,12 +21,13 @@ class UserPublication : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_publication)
 
-        var personList: List<Publication> = listOf(Publication("Kasumi","$10","de color verde"))
+        var personList: List<Publication> = listOf(Publication("Kasumi","$10","de color verde","",
+            listOf("abc")))
         adapter = PublicationAdapter(this, R.layout.list_item, personList)
         listView.adapter = adapter
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication()},{goToActivityUserPublication()},{goToActivityProfile()})
-        setFocusAllMenuElement()
+        focusMenuElement(R.id.btn_menu_orders, true)
     }
 
     /* #############    ALL CONFIGURATION TO INTENTS TRANSITIONS - NAVIGATION BAR   ############# */
@@ -34,10 +35,5 @@ class UserPublication : AppCompatActivity() {
     private fun goToActivityPublication() = startActivity(Intent(this, PublicationActivity::class.java))
     private fun goToActivityUserPublication() = startActivity(Intent(this, UserPublication::class.java))
     private fun goToActivityProfile() = startActivity(Intent(this, ProfileActivity::class.java))
-    private fun setFocusAllMenuElement(){
-        //focusMenuElement(R.id.btn_menu_home, false)
-        focusMenuElement(R.id.btn_menu_orders, true)
-        //focusMenuElement(R.id.btn_menu_publications, false)
-        //focusMenuElement(R.id.btn_menu_userprofile, false)
-    }
+
 }
