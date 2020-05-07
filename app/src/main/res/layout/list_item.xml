@@ -69,6 +69,8 @@
                 android:adjustViewBounds="false"
                 android:scaleX="0.75"
                 android:scaleY="0.75"
+                android:clickable="true"
+                android:onClick="imageClickUpdateEvent"
                 app:srcCompat="@drawable/gear" />
 
             <ImageView
@@ -78,6 +80,8 @@
                 android:layout_weight="1"
                 android:scaleX="0.75"
                 android:scaleY="0.75"
+                android:clickable="true"
+                android:onClick="imageClickCloseEvent"
                 app:srcCompat="@drawable/close" />
 
         </LinearLayout>
