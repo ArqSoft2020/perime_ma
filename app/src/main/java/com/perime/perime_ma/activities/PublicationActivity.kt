@@ -61,6 +61,17 @@ class PublicationActivity : AppCompatActivity() {
 
     fun imageClickUpdateEvent(view: View){
         val publication =  publications[view.id]
+
+        val intent =Intent(this, FormUpdateActivity::class.java)
+
+        intent.putExtra("Title", publication!!.title.toString())
+        intent.putExtra("Description", publication!!.description.toString())
+        intent.putExtra("expiration_date",publication!!.expiration_date.toString())
+        intent.putExtra("price", "$"+publication!!.price.toString())
+        intent.putExtra("categories", publication!!.categories.toString() )
+        startActivity(intent)
+
+
         // LLAMAR AL CAMBIO DE ACTIVITY CON STARTACTIVITY PERO PASANDOLE COMO PARAMETRO DE SU CONTEXTO LA PUBLICACION
     }
 

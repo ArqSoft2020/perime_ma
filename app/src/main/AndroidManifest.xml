@@ -14,12 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.UserPublication"></activity>
+        <activity android:name=".activities.FormUpdatePublicationActivity"></activity>
+        <activity android:name=".activities.UserPublication" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.FormPublicationActivity" />
         <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.PublicationActivity"></activity>
+        <activity android:name=".activities.PublicationActivity" />
         <activity android:name=".activities.OrderActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
