@@ -60,7 +60,7 @@ class PublicationMutations {
                                       expiration_date: String, price: String, categories: List<String>, queryCallback : (Response<UpdatePublicationMutation.Data>) -> Unit) {
             Log.w("-----------", "--------------------------------------------")
             val inputId = Input.optional(id)
-            val input = Input.optional(PublicationInput(Input.optional(""), Input.optional(title),Input.optional(description),Input.optional(state_publication),Input.optional(contact_information),
+            val input = Input.optional(PublicationInput(Input.optional(id), Input.optional(title),Input.optional(description),Input.optional(state_publication),Input.optional(contact_information),
                 Input.optional(id_image), Input.optional(stock),Input.optional(expiration_date),Input.optional(price),Input.optional(categories)) )
 
 

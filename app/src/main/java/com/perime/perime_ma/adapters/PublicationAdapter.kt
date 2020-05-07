@@ -38,7 +38,7 @@ class PublicationAdapter(val context: Context, val layout: Int, val list: List<P
         }
 
         vh.title.text = "${list[position].title}"
-        vh.price.text = "${list[position].price}"
+        vh.price.text = "$${list[position].price}"
         vh.description.text = "${list[position].description}"
         vh.imageView2.id = position
         vh.imageView3.id = position

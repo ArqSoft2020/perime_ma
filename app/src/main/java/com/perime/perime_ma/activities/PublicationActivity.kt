@@ -39,7 +39,7 @@ class PublicationActivity : AppCompatActivity() {
         PublicationQuerys.publicationsQuery(apolloClient) {
             var publicationsGraphql = it.data?.publications!!
             for(publication: PublicationsQuery.Publication? in publicationsGraphql)
-                publications.add(Publication(publication!!._id.toString(), publication!!.title.toString(),publication!!.description.toString(),publication!!.expiration_date.toString(),"$"+publication!!.price.toString(), publication!!.categories as List<String>))
+                publications.add(Publication(publication!!._id.toString(), publication!!.title.toString(),publication!!.description.toString(),publication!!.expiration_date.toString(), publication!!.price.toString(), publication!!.categories as List<String>))
 
             Handler(Looper.getMainLooper()).post(Runnable {
                 adapter = PublicationAdapter(this, R.layout.list_item, publications)
@@ -61,7 +61,25 @@ class PublicationActivity : AppCompatActivity() {
 
     fun imageClickUpdateEvent(view: View){
         val publication =  publications[view.id]
-        // LLAMAR AL CAMBIO DE ACTIVITY CON STARTACTIVITY PERO PASANDOLE COMO PARAMETRO DE SU CONTEXTO LA PUBLICACION
+
+        val intent =Intent(this, FormUpdatePublicationActivity::class.java)
+
+        intent.putExtra("id", publication!!.id.toString())
+        intent.putExtra("Title", publication!!.title.toString())
+        intent.putExtra("Description", publication!!.description.toString())
+        intent.putExtra("expiration_date",publication!!.expiration_date.toString())
+        intent.putExtra("price", publication!!.price.toString())
+        intent.putExtra("categories", descriptionInline(publication!!.categories) )
+        startActivity(intent)
+    }
+
+    private fun descriptionInline(categoriesList : List<String>) : String{
+        var categories : String = ""
+        for(category in categoriesList)
+            categories += "$category,"
+        if(categories.isNotEmpty())
+            return categories.substring(startIndex = 0, endIndex= categories.length-1)
+        return categories
     }
 
     fun imageClickCloseEvent(view : View){
