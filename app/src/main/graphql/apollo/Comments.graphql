@@ -1,0 +1,40 @@
+query getComments{
+    getComments{
+        id_comments
+        id_publication
+        text_comment
+        date_comment
+        id_user
+    }
+}
+
+query getComment($id: ID){
+    getComment(id: $id){
+        id_publication
+        text_comment
+        date_comment
+        id_user
+    }
+}
+
+mutation storeComment($idpubl: ID, $iduser: ID, $text: String){
+    storeComment(idpubl: $idpubl, iduser: $iduser, text: $text){
+        id_comments
+        id_publication
+        text_comment
+        date_comment
+        id_user
+    }
+}
+
+mutation updateComment($id: ID, $text: String){
+    updateComment(id: $id, text: $text){
+        text_comment
+    }
+}
+
+mutation deleteComment($id: ID){
+    deleteComment(id: $id){
+        id_comments
+    }
+}

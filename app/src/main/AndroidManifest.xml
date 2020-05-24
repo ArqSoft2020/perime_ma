@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.FormUpdatePublicationActivity"></activity>
+        <activity android:name=".providers.apollographql.comments_querys.MainActivity"></activity>
+        <activity android:name=".activities.FormUpdatePublicationActivity" />
         <activity android:name=".activities.UserPublication" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
