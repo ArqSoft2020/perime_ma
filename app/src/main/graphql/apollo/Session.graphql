@@ -1,0 +1,27 @@
+mutation sessionmLogin($input: SessionInput){
+    sessionmLogin(input: $input){
+        id_session,
+        token_session
+    }
+}
+
+mutation sessionwLogin($input: SessionInput){
+    sessionwLogin(input: $input){
+        id_session,
+        token_session
+    }
+}
+
+mutation sessionmLogout($id: Int){
+    sessionmLogout(id: $id){
+        id_session,
+        token_session
+    }
+}
+
+mutation sessionwLogout($id: Int){
+    sessionwLogout(id: $id){
+        id_session,
+        token_session
+    }
+}
