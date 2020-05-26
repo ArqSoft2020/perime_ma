@@ -23,9 +23,9 @@ import android.widget.Switch
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.perime.perime_ma.activities.*
+import com.perime.perime_ma.extensions.SharedPreferences
 import com.perime.perime_ma.extensions.focusMenuElement
-
-var confirm:Boolean=false
+import kotlinx.android.synthetic.main.activity_maps.*
 
 class MapsActivity : MapsKotlinProvider() {
 
@@ -39,29 +39,16 @@ class MapsActivity : MapsKotlinProvider() {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        val auth = SharedPreferences.sharedpreferences.authenticated
 
-        val sw1 = findViewById<Switch>(R.id.switch1)
-        sw1?.setOnCheckedChangeListener({ _, isChecked ->
-            if (isChecked) {
-                    Toast.makeText(this,"Estas registrado, Accede a tu perfil",Toast.LENGTH_LONG).show()
-                    confirm=true
-                } else {
-                    Toast.makeText(this,"No estas registrado, Por favor registrate",Toast.LENGTH_LONG).show()
-                    confirm=false
-                }
-            })
-
-        val mFab = findViewById<FloatingActionButton>(R.id.agregarPublicacion)
-        mFab.setOnClickListener {
-            if (confirm){
+        agregarPublicacion.setOnClickListener {
+            if (auth)
                 startActivity(Intent(this, FormPublicationActivity::class.java))
-            }else{
+            else
                 Toast.makeText(this,"No estas registrado, Por favor registrate",Toast.LENGTH_LONG).show()
-            }
-
         }
 
-        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(confirm)},{goToActivityUserPublication(confirm)},{goToActivityProfile(confirm)})
+        setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(auth)},{goToActivityUserPublication(auth)},{goToActivityProfile(auth)})
         focusMenuElement(R.id.btn_menu_home, true)
     }
 
@@ -70,27 +57,22 @@ class MapsActivity : MapsKotlinProvider() {
     fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
 
     private fun goToActivityPublication(validation:Boolean) {
-        if (validation){
+        if (validation)
             startActivity(Intent(this, PublicationActivity::class.java))
-        }else{
-            Toast.makeText(this,"Usuario no identificado, Por favor registrate",Toast.LENGTH_LONG).show()
-        }
+        else
+            Toast.makeText(this,"No disponible. Por favor Logueate",Toast.LENGTH_LONG).show()
     }
     private fun goToActivityUserPublication(validation: Boolean) {
-        if (validation){
+        if (validation)
             startActivity(Intent(this, UserPublication::class.java))
-        }else{
-            Toast.makeText(this,"Usuario no identificado, Por favor registrate",Toast.LENGTH_LONG).show()
-        }
+        else
+            Toast.makeText(this,"No disponible. Por favor Logueate",Toast.LENGTH_LONG).show()
     }
     private fun goToActivityProfile(validation:Boolean){
-        if (validation){
+        if (validation)
             startActivity(Intent(this, ProfileActivity::class.java))
-        }else{
-
+        else
             startActivity(Intent(this, LoginActivity::class.java))
-        }
-
     }
 
 }

@@ -2,12 +2,13 @@ package com.perime.perime_ma.providers.apollographql.user_querys
 
 import android.util.Log
 import apollo.GetUserQuery
-import apollo.UserQuery
+import apollo.UsersQuery
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.request.RequestHeaders
 
 class UserQuerys {
     companion object{
@@ -15,26 +16,26 @@ class UserQuerys {
         /* ######       GRAPHQL_QUERY : publicationsQuery        ######*/
         /***
          * UN EJEMPLO DE USO
-        apolloClient = ApolloGraphql.setUpApolloClient()
-        PublicationQuerys.publicationsQuery(apolloClient) {
-        var publications = it.data?.publications!!
-        for(publication: PublicationsQuery.Publication? in publications){
-        Log.w("File: ", publication?.title)
-        }
-        }
+                apolloClient = ApolloGraphql.setUpApolloClient()
+                UserQuerys.usersQuery(apolloClient) {
+                var users = it.data?.user!!
+                for(user: UsersQuery.User? in users){
+                    Log.w("File: ", publication?.email_user)
+                }
+            }
          **/
-        fun publicationsQuery(client: ApolloClient, queryCallback : (Response<UserQuery.Data>) -> Unit) {
+        fun usersQuery(client: ApolloClient, queryCallback : (Response<UsersQuery.Data>) -> Unit) {
             Log.w("-----------", "--------------------------------------------")
             client.newBuilder().build().query(
-                UserQuery()
-            ).enqueue(object : ApolloCall.Callback<UserQuery.Data>(){
+                UsersQuery()
+            ).enqueue(object : ApolloCall.Callback<UsersQuery.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
 
-                override fun onResponse(response: Response<UserQuery.Data>) {
+                override fun onResponse(response: Response<UsersQuery.Data>) {
 
                     queryCallback(response)
 
-                    Log.w("######  GRAPHQL: publicationsQuery::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
+                    Log.w("######  GRAPHQL: usersQuery::: ", response.data.toString());Log.w("-----------", "--------------------------------------------")
                 }
 
             })
@@ -46,17 +47,21 @@ class UserQuerys {
         /***
          * UN EJEMPLO DE USO
         apolloClient = ApolloGraphql.setUpApolloClient()
-        PublicationQuerys.getPublicationQuery(apolloClient, "5eb0b8022727be001995a06d") {
-        var publication = it.data?.getPublication!!
-        Log.w("File: ", publication?.title.toString())
+        UserQuerys.getUserQuery(apolloClient, "1") {
+        var user = it.data?.getUser!!
+        Log.w("File: ", user?.email_user.toString())
         }
          **/
-        fun getPublicationQuery(client: ApolloClient, id_user: String, queryCallback : (Response<GetUserQuery.Data>) -> Unit) {
+        fun getUserQuery(client: ApolloClient, id: Int, token: String, queryCallback : (Response<GetUserQuery.Data>) -> Unit) {
             Log.w("-----------", "--------------------------------------------")
-            val input = Input.optional(id_user)
+            val input = Input.optional(id)
 
             client.newBuilder().build().query(
                 GetUserQuery(input)
+            ).requestHeaders(
+                RequestHeaders.builder()
+                    .addHeader("authorization", token)
+                    .build()
             ).enqueue(object : ApolloCall.Callback<GetUserQuery.Data>(){
                 override fun onFailure(e: ApolloException) { Log.w("######  ERROR:::    ", e.message.toString()); Log.w("-----------", "--------------------------------------------") }
 

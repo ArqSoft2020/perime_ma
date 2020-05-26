@@ -5,6 +5,10 @@ import apollo.CreateUserMutation
 import apollo.DeleteUserMutation
 import apollo.UpdateUserMutation
 import apollo.type.UserInput
+//import apollo.CreateUserMutation
+//import apollo.DeleteUserMutation
+//import apollo.UpdateUserMutation
+//import apollo.type.UserInput
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Input
@@ -20,9 +24,9 @@ class UserMutations {
         /***
          * UN EJEMPLO DE USO
         apolloClient = ApolloGraphql.setUpApolloClient()
-        PublicationMutations.createPublicationMutation(apolloClient, "Arroz android", "apollo arroz", true, "42531433425", "2", "1", "2016-05-18T16:00:00Z", "20", listOf("arroz","diana","blanca")) {
-        var publication = it.data?.createPublication!!
-        Log.w("File: ", publication?.title.toString())
+        UserMutations.createUserMutation(apolloClient, "luaavilagu", "password", "Cra. 102 # 30x - 33", "3001234567", "luaavilagu@temp.com")) {
+        var user = it.data?.createUser!!
+        Log.w("File: ", user?.email_user.toString())
         }
          **/
         fun createUserMutation(client: ApolloClient, username_user: String, passhash_user: String, address_user: String, cellphone_user: String, email_user: String,
@@ -30,11 +34,11 @@ class UserMutations {
             Log.w("-----------", "--------------------------------------------")
             val input = Input.optional(
                 UserInput(
-                    Input.optional(""), Input.optional(username_user),
+                    Input.optional(username_user),
                     Input.optional(passhash_user),
                     Input.optional(address_user),
                     Input.optional(cellphone_user),
-                    Input.optional(email_user)) )
+                    Input.optional(email_user)))
 
 
             client.newBuilder().build().mutate(
@@ -57,9 +61,9 @@ class UserMutations {
         /***
          * UN EJEMPLO DE USO
         apolloClient = ApolloGraphql.setUpApolloClient()
-        PublicationMutations.updatePublicationMutation(apolloClient, "5eb20adac0c12f0012a0b803", "Arroz android updated", "apollo arroz", true, "42531433425", "2", "1", "2016-05-18T16:00:00Z", "20", listOf("arroz","diana","blanca")) {
-        var publication = it.data?.updatePublication!!
-        Log.w("File: ", publication?.title.toString())
+        UserMutations.updateUserMutation(apolloClient, "luaavilagu1", "password", "Cra. 102 # 30x - 33", "3001234567", "luaavilagu@temp.com") {
+        var user = it.data?.updateUser!!
+        Log.w("File: ", user?.email_user.toString())
         }
          **/
         fun updateUserMutation(client: ApolloClient,  id_user: String, username_user: String, passhash_user: String, address_user: String, cellphone_user: String, email_user: String,
@@ -68,7 +72,7 @@ class UserMutations {
             val inputId = Input.optional(id_user)
             val input = Input.optional(
                 UserInput(
-                    Input.optional(""), Input.optional(username_user),
+                    Input.optional(username_user),
                     Input.optional(passhash_user),
                     Input.optional(address_user),
                     Input.optional(cellphone_user),
@@ -96,12 +100,12 @@ class UserMutations {
         /***
          * UN EJEMPLO DE USO
         apolloClient = ApolloGraphql.setUpApolloClient()
-        PublicationMutations.deletePublicationMutation(apolloClient, "5eb20adac0c12f0012a0b803") {
-        var publication = it.data?.deletePublication!!
-        Log.w("File: ", publication?.toString())
+        UserMutations.deleteUserMutation(apolloClient, "1") {
+        var user = it.data?.deleteUser!!
+        Log.w("File: ", user?.toString())
         }
          **/
-        fun deletePublicationMutation(client: ApolloClient, id_user: String, queryCallback : (Response<DeleteUserMutation.Data>) -> Unit) {
+        fun deleteUserMutation(client: ApolloClient, id_user: String, queryCallback : (Response<DeleteUserMutation.Data>) -> Unit) {
             Log.w("-----------", "--------------------------------------------")
             val inputId = Input.optional(id_user)
 
