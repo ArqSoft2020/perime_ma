@@ -14,5 +14,6 @@ class SharedPreferences : Application() {
             sharedpreferences.authenticated = false
             sharedpreferences.idUser = -1
             sharedpreferences.token = ""
+            sharedpreferences.profilePicture = ""
         }
 }

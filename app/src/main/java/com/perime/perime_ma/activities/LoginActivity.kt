@@ -2,15 +2,19 @@
 package com.perime.perime_ma.activities
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloClient
 import com.perime.perime_ma.MapsActivity
 import com.perime.perime_ma.R
@@ -21,6 +25,11 @@ import com.perime.perime_ma.providers.apollographql.ApolloGraphql
 import com.perime.perime_ma.providers.apollographql.session_querys.SessionMutations
 import com.perime.perime_ma.providers.apollographql.user_querys.UserQuerys
 import kotlinx.android.synthetic.main.activity_login.*
+import java.io.*
+import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -93,7 +102,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun graphqlGetUser(id: Int, token: String){
         apolloClient = ApolloGraphql.setUpApolloClient()
-        apolloClient = ApolloGraphql.setUpApolloClient()
         UserQuerys.getUserQuery(apolloClient, id, token) {
             var user = it.data?.getUser!!
             Log.w("File: ", user?.username_user.toString())
@@ -101,7 +109,24 @@ class LoginActivity : AppCompatActivity() {
             SharedPreferences.sharedpreferences.userEmail = user.email_user
             SharedPreferences.sharedpreferences.userAddress = user.address_user
             SharedPreferences.sharedpreferences.userPhone = user.cellphone_user
-            startActivity(Intent(this, ProfileActivity::class.java))
+
+
+            val thread = Thread(Runnable {
+                try {
+                    val url = URL("http://34.69.30.153:9000/api/multimedia/$id/USER")
+                    val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    val byteArrayOutputStream = ByteArrayOutputStream()
+                    image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                    val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+                    val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+                    SharedPreferences.sharedpreferences.profilePicture = encoded
+                    Handler(Looper.getMainLooper()).post(Runnable { startActivity(Intent(this, ProfileActivity::class.java)) })
+
+                } catch (e: Exception) {
+                    Handler(Looper.getMainLooper()).post(Runnable { startActivity(Intent(this, ProfileActivity::class.java)) })
+                }
+            })
+            thread.start()
         }
     }
 }
