@@ -1,15 +1,25 @@
 package com.perime.perime_ma.activities
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.graphics.Bitmap
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
+import android.provider.MediaStore.MediaColumns
 import android.text.TextUtils
+import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloClient
 import com.perime.perime_ma.MapsActivity
 import com.perime.perime_ma.R
@@ -17,22 +27,30 @@ import com.perime.perime_ma.extensions.SharedPreferences
 import com.perime.perime_ma.extensions.focusMenuElement
 import com.perime.perime_ma.extensions.setAllNavigationBarIntentTransitions
 import com.perime.perime_ma.providers.apollographql.ApolloGraphql
+import com.perime.perime_ma.providers.apollographql.multimedia_querys.MultimediaMutations
 import com.perime.perime_ma.providers.apollographql.user_querys.UserMutations
 import kotlinx.android.synthetic.main.activity_register.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var apolloClient: ApolloClient
+    private var uri : Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val auth = SharedPreferences.sharedpreferences.authenticated
+        uri = null
 
         setAllNavigationBarIntentTransitions({goToActivityMap()},{goToActivityPublication(auth)},{goToActivityUserPublication(auth)},{goToActivityProfile()})
         focusMenuElement(R.id.btn_menu_userprofile, true)
 
         btn_register.setOnClickListener(){ register() }
+        imageButton.setOnClickListener(){ uploadImage() }
     }
 
     private fun goToActivityMap() = startActivity(Intent(this, MapsActivity::class.java))
@@ -87,6 +105,10 @@ class RegisterActivity : AppCompatActivity() {
         apolloClient = ApolloGraphql.setUpApolloClient()
         UserMutations.createUserMutation(apolloClient, username, password, address, phone, email) {
             if (it.data?.createUser !== null) {
+
+                if(uri !== null)
+                    uploadImageRequest(it.data?.createUser!!.id_user!!.toString())
+
                 Handler(Looper.getMainLooper()).post(Runnable {
                     val toast = Toast.makeText(
                         applicationContext,
@@ -114,5 +136,55 @@ class RegisterActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+
+
+
+
+    private fun uploadImage(){
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        startActivityForResult(photoPickerIntent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) if (resultCode == Activity.RESULT_OK) {
+            val selectedImage = data?.data
+            uri = selectedImage
+            val filePath = getPath(selectedImage)
+            val file_extn = filePath.substring(filePath.lastIndexOf(".") + 1)
+
+            try {
+                if (file_extn == "img" || file_extn == "jpg" || file_extn == "jpeg"  || file_extn == "png")
+                    imageButton.setImageURI(selectedImage)
+                 else
+                    Handler(Looper.getMainLooper()).post(Runnable { Toast.makeText(this,"El Archivo Seleccionado No Fue Una Imagen", Toast.LENGTH_LONG).show() })
+
+            } catch (e: FileNotFoundException) {
+                Handler(Looper.getMainLooper()).post(Runnable { Toast.makeText(this,"Error del Sistema Interno de archivos", Toast.LENGTH_LONG).show() })
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun getPath(uri: Uri?): String {
+        val projection = arrayOf(MediaColumns.DATA)
+        val cursor: Cursor = managedQuery(uri, projection, null, null, null)
+        val columnIndex = cursor.getColumnIndexOrThrow(MediaColumns.DATA)
+        cursor.moveToFirst()
+        return cursor.getString(columnIndex)
+    }
+
+    private fun uploadImageRequest(id : String){
+        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+        val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+        apolloClient = ApolloGraphql.setUpApolloClient()
+        MultimediaMutations.storeFileMutation(apolloClient, id,"USER",encoded) {}
     }
 }

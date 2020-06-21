@@ -2,6 +2,7 @@ package com.perime.perime_ma.extensions
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 
 class Preferences(context: Context) {
     val PREFS_NAME = "com.permie.sharedpreferences"
@@ -34,4 +35,8 @@ class Preferences(context: Context) {
     var userPhone: String?
         get() = prefs.getString("userphone", "")
         set(value) = prefs.edit().putString("userphone", value).apply()
+
+    var profilePicture : String?
+        get() = prefs.getString("profilepicture", "")
+        set(value) = prefs.edit().putString("profilepicture", value).apply()
 }
