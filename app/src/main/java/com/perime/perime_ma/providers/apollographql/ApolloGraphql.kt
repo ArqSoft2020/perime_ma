@@ -5,7 +5,7 @@ import com.apollographql.apollo.ApolloClient
 
 class ApolloGraphql {
     companion object{
-        private const val BASE_URL = "http://104.198.185.230:3000/graphql"
+        private const val BASE_URL = "http://bl-api-gateway.default.35.236.88.245.xip.io:3000/graphql"
 
         fun setUpApolloClient(): ApolloClient {
 

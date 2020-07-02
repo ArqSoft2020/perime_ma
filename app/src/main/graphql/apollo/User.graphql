@@ -1,0 +1,54 @@
+query users{
+    users{
+        id_user,
+        username_user,
+        passhash_user,
+        address_user,
+        cellphone_user,
+        email_user
+    }
+}
+
+query getUser($id: Int){
+    getUser(id: $id){
+        id_user,
+        username_user,
+        passhash_user,
+        address_user,
+        cellphone_user,
+        email_user,
+    }
+}
+
+mutation createUser($input: UserInput){
+    createUser(input: $input){
+        id_user,
+        username_user,
+        passhash_user,
+        address_user,
+        cellphone_user,
+        email_user
+    }
+}
+
+mutation updateUser($id: ID, $input: UserInput){
+    updateUser(id: $id, input: $input){
+        id_user,
+        username_user,
+        passhash_user,
+        address_user,
+        cellphone_user,
+        email_user
+    }
+}
+
+mutation deleteUser($id: ID){
+    deleteUser(id: $id){
+        id_user,
+        username_user,
+        passhash_user,
+        address_user,
+        cellphone_user,
+        email_user
+    }
+}
